@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Bomba - Supabase</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Chart.js para históricos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Dashboard de Bomba</h1>
+      <p>Visualización de valores actuales e históricos desde Supabase</p>
+    </div>
+
+    <button id="btn-refresh" class="btn">Actualizar</button>
+  </header>
+
+  <main class="container">
+    <section class="status-grid">
+      <article class="card">
+        <span class="label">Frecuencia</span>
+        <strong id="current-frecuencia">--</strong>
+        <span class="unit">Hz</span>
+      </article>
+
+      <article class="card">
+        <span class="label">Bomba</span>
+        <strong id="current-bomba">--</strong>
+        <span class="unit">Estado</span>
+      </article>
+
+      <article class="card">
+        <span class="label">Caudal</span>
+        <strong id="current-caudal">--</strong>
+        <span class="unit">GPD</span>
+      </article>
+
+      <article class="card">
+        <span class="label">Presión</span>
+        <strong id="current-presion">--</strong>
+        <span class="unit">PSI</span>
+      </article>
+
+      <article class="card">
+        <span class="label">Nivel</span>
+        <strong id="current-nivel">--</strong>
+        <span class="unit">mm</span>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <h2>Histórico de datos</h2>
+          <p>Seleccione un rango de fecha y hora para consultar los registros.</p>
+        </div>
+      </div>
+
+      <form id="filter-form" class="filters">
+        <label>
+          Fecha inicial
+          <input type="datetime-local" id="start-date" required />
+        </label>
+
+        <label>
+          Fecha final
+          <input type="datetime-local" id="end-date" required />
+        </label>
+
+        <button type="submit" class="btn">Consultar histórico</button>
+      </form>
+
+      <p id="message" class="message"></p>
+
+      <div class="chart-box">
+        <canvas id="history-chart"></canvas>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Tabla de registros</h2>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha / Hora</th>
+              <th>Frecuencia (Hz)</th>
+              <th>Bomba</th>
+              <th>Caudal (GPD)</th>
+              <th>Presión (PSI)</th>
+              <th>Nivel (mm)</th>
+            </tr>
+          </thead>
+          <tbody id="history-table">
+            <tr>
+              <td colspan="6">Sin datos cargados.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
