@@ -76,7 +76,7 @@ function validateRanges(row) {
     frecuencia: clampNumber(row.frecuencia / 10, 0, 60),
     caudal: clampNumber(row.caudal / 100,  0, 600),
     presion: clampNumber(row.presion, 0, 50000),
-    nivel: row.nivel / 10,
+    nivel: Math.trunc(row.nivel  * 11309.73 / 3785.41) / 100,
     bomba: Boolean(row.bomba),
     created_at: row.created_at
   };
@@ -207,7 +207,7 @@ function renderChart(rows) {
       tension: 0.3
     },
     {
-      label: "Nivel (mm)",
+      label: "Nivel (GAL)",
       data: rows.map((row) => row.nivel),
       yAxisID: "yNivel",
       pointRadius: 0,
