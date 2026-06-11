@@ -74,7 +74,7 @@ function showMessage(text, type = "") {
 function validateRanges(row) {
   return {
     frecuencia: clampNumber(row.frecuencia / 10, 0, 60),
-    caudal: row.caudal / 100,
+    caudal: clampNumber(row.caudal / 100,  0, 600),
     presion: clampNumber(row.presion, 0, 50000),
     nivel: row.nivel / 10,
     bomba: Boolean(row.bomba),
@@ -86,6 +86,7 @@ function clampNumber(value, min, max) {
   const number = Number(value);
 
   if (Number.isNaN(number)) return 0;
+  if (number > 50000 ) return min;
   return Math.min(Math.max(number, min), max);
 }
 
@@ -291,7 +292,7 @@ function renderChart(rows) {
           type: "linear",
           position: "right",
           min: 0,
-          max: 810,
+          max: 1000,
           display: false
         },
         yBomba: {
