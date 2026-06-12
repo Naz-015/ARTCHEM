@@ -292,7 +292,7 @@ function renderChart(rows) {
           type: "linear",
           position: "right",
           min: 0,
-          max: 1000,
+          max: 300,
           display: false
         },
         yBomba: {
