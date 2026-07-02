@@ -74,7 +74,7 @@ function showMessage(text, type = "") {
 function validateRanges(row) {
   return {
     frecuencia: clampNumber(row.frecuencia / 10, 0, 60),
-    caudal: clampNumber(row.caudal / 100,  0, 600),
+    caudal: 0,//clampNumber(row.caudal / 100,  0, 600),
     presion: clampNumber(row.presion, 0, 50000),
     nivel: Math.trunc(row.nivel  * 11309.73 / 3785.41) / 100,
     bomba: Boolean(row.bomba),
